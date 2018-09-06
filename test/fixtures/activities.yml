@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name_activity: MyString
+  description_activity: MyString
+  fecha_activity: 2018-09-06 16:15:23
+  lugar_activity: MyString
+  status_activity: one
+  type_activity: one
+
+two:
+  name_activity: MyString
+  description_activity: MyString
+  fecha_activity: 2018-09-06 16:15:23
+  lugar_activity: MyString
+  status_activity: two
+  type_activity: two

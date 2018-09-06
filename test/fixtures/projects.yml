@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name_project: MyString
+  description_project: MyString
+  code_project: MyString
+  status_project: false
+  prom_calif_project: 1.5
+  category: one
+  spectator: one
+
+two:
+  name_project: MyString
+  description_project: MyString
+  code_project: MyString
+  status_project: false
+  prom_calif_project: 1.5
+  category: two
+  spectator: two

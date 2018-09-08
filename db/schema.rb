@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180906225610) do
+ActiveRecord::Schema.define(version: 20180908012625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20180906225610) do
     t.bigint "type_activity_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "project_id"
+    t.index ["project_id"], name: "index_activities_on_project_id"
     t.index ["status_activity_id"], name: "index_activities_on_status_activity_id"
     t.index ["type_activity_id"], name: "index_activities_on_type_activity_id"
   end
@@ -132,12 +134,15 @@ ActiveRecord::Schema.define(version: 20180906225610) do
     t.bigint "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["token"], name: "index_users_on_token"
     t.index ["university_id"], name: "index_users_on_university_id"
     t.index ["user_type_id"], name: "index_users_on_user_type_id"
   end
 
+  add_foreign_key "activities", "projects"
   add_foreign_key "activities", "status_activities"
   add_foreign_key "activities", "type_activities"
   add_foreign_key "appreciations", "has_user_projects"

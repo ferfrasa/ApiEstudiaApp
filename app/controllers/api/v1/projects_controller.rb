@@ -7,20 +7,22 @@ module Api
       # GET /projects.json
       def index
         @projects = Project.all
+        render json: @projects
       end
 
       # GET /projects/1
       # GET /projects/1.json
       def show
+        render json: @project
       end
 
       # POST /projects
       # POST /projects.json
       def create
-        @project = Project.new(project_params)
+        @project = Project.new(project_params_create)
 
         if @project.save
-          render :show, status: :created, location: @project
+          render json: @project, status: :created #, location: @project
         else
           render json: @project.errors, status: :unprocessable_entity
         end
@@ -29,8 +31,8 @@ module Api
       # PATCH/PUT /projects/1
       # PATCH/PUT /projects/1.json
       def update
-        if @project.update(project_params)
-          render :show, status: :ok, location: @project
+        if @project.update(project_params_update)
+          render json: @project, status: :ok#, location: @project
         else
           render json: @project.errors, status: :unprocessable_entity
         end
@@ -39,7 +41,11 @@ module Api
       # DELETE /projects/1
       # DELETE /projects/1.json
       def destroy
-        @project.destroy
+        if @project.destroy
+          render json: {project: "ELIMINADO"} ,status: :ok #, location: @category
+        else
+          render json: @project.errors, status: :unprocessable_entity
+         end
       end
 
       private
@@ -49,8 +55,19 @@ module Api
         end
 
         # Never trust parameters from the scary internet, only allow the white list through.
-        def project_params
-          params.require(:project).permit(:name_project, :description_project, :code_project, :status_project, :prom_calif_project, :category_id, :spectator_id)
+        def project_params_create
+          params.require(:project).permit(:name_project, :description_project, 
+             :category_id, :spectator_id, tag_ids:[])
+        end
+
+        def project_params_update
+          params.require(:project).permit(:name_project, :description_project, 
+             :category_id, :spectator_id)
+        end
+
+        def project_params_update
+          params.require(:project).permit(:name_project, :description_project, 
+             :status_project, :category_id, :spectator_id)
         end
     end
   end

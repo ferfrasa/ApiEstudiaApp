@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  namespace 'api' do
+  namespace 'api', defaults: { format: "json" }  do
     namespace 'v1' do
       resources :appreciations
       resources :has_user_projects
       resources :has_project_tags
-      devise_for :users
+      resources :users
       resources :activities
       resources :projects
       resources :tags

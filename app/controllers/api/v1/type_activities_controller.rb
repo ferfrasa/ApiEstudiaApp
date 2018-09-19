@@ -7,11 +7,13 @@ module Api
       # GET /type_activities.json
       def index
         @type_activities = TypeActivity.all
+        render json: @type_activities
       end
 
       # GET /type_activities/1
       # GET /type_activities/1.json
       def show
+        render json: @type_activity
       end
 
       # POST /type_activities
@@ -20,7 +22,7 @@ module Api
         @type_activity = TypeActivity.new(type_activity_params)
 
         if @type_activity.save
-          render :show, status: :created, location: @type_activity
+          render json: @type_activity, status: :created#, location: @type_activity
         else
           render json: @type_activity.errors, status: :unprocessable_entity
         end
@@ -30,7 +32,7 @@ module Api
       # PATCH/PUT /type_activities/1.json
       def update
         if @type_activity.update(type_activity_params)
-          render :show, status: :ok, location: @type_activity
+          render json: @type_activity, status: :ok#, location: @type_activity
         else
           render json: @type_activity.errors, status: :unprocessable_entity
         end
@@ -39,7 +41,11 @@ module Api
       # DELETE /type_activities/1
       # DELETE /type_activities/1.json
       def destroy
-        @type_activity.destroy
+        if @type_activity.destroy
+          render json: {type_activity: "ELIMINADO"} ,status: :ok #, location: @category
+        else
+          render json: @type_activity, status: :unprocessable_entity
+        end
       end
 
       private

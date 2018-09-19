@@ -6,6 +6,7 @@ class Activity < ApplicationRecord
   validates :name_activity, presence: true
   validates :description_activity, presence: true
   validates :fecha_activity, presence: true
+  validates :lugar_activity, presence: true
 
 end
 

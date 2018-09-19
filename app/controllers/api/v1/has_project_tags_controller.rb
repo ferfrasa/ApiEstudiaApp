@@ -7,11 +7,13 @@ module Api
       # GET /has_project_tags.json
       def index
         @has_project_tags = HasProjectTag.all
+        render json: @has_project_tags
       end
 
       # GET /has_project_tags/1
       # GET /has_project_tags/1.json
       def show
+        render json: @has_project_tag
       end
 
       # POST /has_project_tags
@@ -20,7 +22,7 @@ module Api
         @has_project_tag = HasProjectTag.new(has_project_tag_params)
 
         if @has_project_tag.save
-          render :show, status: :created, location: @has_project_tag
+          render json: @has_project_tag, status: :created#, location: @has_project_tag
         else
           render json: @has_project_tag.errors, status: :unprocessable_entity
         end
@@ -30,7 +32,7 @@ module Api
       # PATCH/PUT /has_project_tags/1.json
       def update
         if @has_project_tag.update(has_project_tag_params)
-          render :show, status: :ok, location: @has_project_tag
+          render json: @has_project_tag, status: :ok#, location: @has_project_tag
         else
           render json: @has_project_tag.errors, status: :unprocessable_entity
         end
@@ -39,7 +41,11 @@ module Api
       # DELETE /has_project_tags/1
       # DELETE /has_project_tags/1.json
       def destroy
-        @has_project_tag.destroy
+        if @has_project_tag.destroy.destroy
+          render json: {has_project_tag: "ELIMINADO"} ,status: :ok #, location: @category
+        else
+          render json: @has_project_tag.destroy, status: :unprocessable_entity
+        end
       end
 
       private

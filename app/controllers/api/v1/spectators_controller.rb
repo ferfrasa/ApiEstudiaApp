@@ -7,11 +7,13 @@ module Api
       # GET /spectators.json
       def index
         @spectators = Spectator.all
+        render json: @spectators
       end
 
       # GET /spectators/1
       # GET /spectators/1.json
       def show
+        render json: @spectator
       end
 
       # POST /spectators
@@ -20,7 +22,7 @@ module Api
         @spectator = Spectator.new(spectator_params)
 
         if @spectator.save
-          render :show, status: :created, location: @spectator
+          render json: @spectator, status: :created #, location: @spectator
         else
           render json: @spectator.errors, status: :unprocessable_entity
         end
@@ -30,7 +32,7 @@ module Api
       # PATCH/PUT /spectators/1.json
       def update
         if @spectator.update(spectator_params)
-          render :show, status: :ok, location: @spectator
+          render json: @spectator, status: :ok #, location: @spectator
         else
           render json: @spectator.errors, status: :unprocessable_entity
         end
@@ -39,7 +41,12 @@ module Api
       # DELETE /spectators/1
       # DELETE /spectators/1.json
       def destroy
-        @spectator.destroy
+        if @spectator.destroy
+          render json: {spectator: "ELIMINADO"} ,status: :ok #, location: @category
+        else
+          render json: @spectator.errors, status: :unprocessable_entity
+         end
+      
       end
 
       private

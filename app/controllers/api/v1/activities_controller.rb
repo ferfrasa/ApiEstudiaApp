@@ -7,11 +7,13 @@ module Api
       # GET /activities.json
       def index
         @activities = Activity.all
+        render json: @activities
       end
 
       # GET /activities/1
       # GET /activities/1.json
       def show
+        render json: @activity
       end
 
       # POST /activities
@@ -20,7 +22,7 @@ module Api
         @activity = Activity.new(activity_params)
 
         if @activity.save
-          render :show, status: :created, location: @activity
+          render json: @activity, status: :created#, location: @activity
         else
           render json: @activity.errors, status: :unprocessable_entity
         end
@@ -30,7 +32,7 @@ module Api
       # PATCH/PUT /activities/1.json
       def update
         if @activity.update(activity_params)
-          render :show, status: :ok, location: @activity
+          render json: @activity, status: :ok#, location: @activity
         else
           render json: @activity.errors, status: :unprocessable_entity
         end
@@ -39,7 +41,11 @@ module Api
       # DELETE /activities/1
       # DELETE /activities/1.json
       def destroy
-        @activity.destroy
+        if @activity.destroy
+          render json: {activity: "ELIMINADO"} ,status: :ok #, location: @category
+        else
+          render json: @activity.errors, status: :unprocessable_entity
+         end
       end
 
       private

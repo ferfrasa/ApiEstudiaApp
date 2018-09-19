@@ -7,11 +7,13 @@ module Api
       # GET /user_types.json
       def index
         @user_types = UserType.all
+        render json: @user_types
       end
 
       # GET /user_types/1
       # GET /user_types/1.json
       def show
+        render json: @user_type
       end
 
       # POST /user_types
@@ -20,7 +22,7 @@ module Api
         @user_type = UserType.new(user_type_params)
 
         if @user_type.save
-          render :show, status: :created, location: @user_type
+          render json: @user_type, status: :created #, location: @user_type
         else
           render json: @user_type.errors, status: :unprocessable_entity
         end
@@ -30,7 +32,7 @@ module Api
       # PATCH/PUT /user_types/1.json
       def update
         if @user_type.update(user_type_params)
-          render :show, status: :ok, location: @user_type
+           render json: @user_type, status: :ok#, location: @user_type
         else
           render json: @user_type.errors, status: :unprocessable_entity
         end
@@ -39,7 +41,11 @@ module Api
       # DELETE /user_types/1
       # DELETE /user_types/1.json
       def destroy
-        @user_type.destroy
+        if @user_type.destroy
+          render json: {user_type: "ELIMINADO"} ,status: :ok #, location: @category
+        else
+          render json: @user_type.errors, status: :unprocessable_entity
+         end
       end
 
       private

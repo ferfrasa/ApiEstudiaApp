@@ -7,11 +7,13 @@ module Api
       # GET /tags.json
       def index
         @tags = Tag.all
+        render json: @tags
       end
 
       # GET /tags/1
       # GET /tags/1.json
       def show
+        render json: @tag
       end
 
       # POST /tags
@@ -20,7 +22,7 @@ module Api
         @tag = Tag.new(tag_params)
 
         if @tag.save
-          render :show, status: :created, location: @tag
+          render json: @tag, status: :created#, location: @tag
         else
           render json: @tag.errors, status: :unprocessable_entity
         end
@@ -30,7 +32,7 @@ module Api
       # PATCH/PUT /tags/1.json
       def update
         if @tag.update(tag_params)
-          render :show, status: :ok, location: @tag
+          render json: @tag, status: :ok#, location: @tag
         else
           render json: @tag.errors, status: :unprocessable_entity
         end
@@ -39,7 +41,11 @@ module Api
       # DELETE /tags/1
       # DELETE /tags/1.json
       def destroy
-        @tag.destroy
+        if @tag.destroy
+          render json: {tag: "ELIMINADO"} ,status: :ok #, location: @category
+        else
+          render json: @tag.errors, status: :unprocessable_entity
+        end
       end
 
       private

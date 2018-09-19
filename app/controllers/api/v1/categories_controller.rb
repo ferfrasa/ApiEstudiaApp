@@ -7,11 +7,13 @@ module Api
       # GET /categories.json
       def index
         @categories = Category.all
+        render json: @categories
       end
 
       # GET /categories/1
       # GET /categories/1.json
       def show
+        render json: @category
       end
 
       # POST /categories
@@ -20,7 +22,7 @@ module Api
         @category = Category.new(category_params)
 
         if @category.save
-          render :show, status: :created, location: @category
+          render json: @category, status: :created #, location: @ 
         else
           render json: @category.errors, status: :unprocessable_entity
         end
@@ -30,7 +32,7 @@ module Api
       # PATCH/PUT /categories/1.json
       def update
         if @category.update(category_params)
-          render :show, status: :ok, location: @category
+          render json: @category, status: :ok #, location: @category
         else
           render json: @category.errors, status: :unprocessable_entity
         end
@@ -38,8 +40,16 @@ module Api
 
       # DELETE /categories/1
       # DELETE /categories/1.json
+
+
+
+      
       def destroy
-        @category.destroy
+        if @category.destroy
+          render json: {category: "ELIMINADO"} ,status: :ok #, location: @category
+        else
+          render json: @category.errors, status: :unprocessable_entity
+         end
       end
 
       private

@@ -7,11 +7,13 @@ module Api
       # GET /universities.json
       def index
         @universities = University.all
+        render json: @universities
       end
 
       # GET /universities/1
       # GET /universities/1.json
       def show
+        render json: @university
       end
 
       # POST /universities
@@ -20,7 +22,7 @@ module Api
         @university = University.new(university_params)
 
         if @university.save
-          render :show, status: :created, location: @university
+          render json: @university, status: :created #, location: @university
         else
           render json: @university.errors, status: :unprocessable_entity
         end
@@ -30,7 +32,7 @@ module Api
       # PATCH/PUT /universities/1.json
       def update
         if @university.update(university_params)
-          render :show, status: :ok, location: @university
+          render json: @university, status: :ok #, location: @university
         else
           render json: @university.errors, status: :unprocessable_entity
         end
@@ -39,7 +41,11 @@ module Api
       # DELETE /universities/1
       # DELETE /universities/1.json
       def destroy
-        @university.destroy
+        if @university.destroy
+          render json: {university: "ELIMINADO"} ,status: :ok #, location: @category
+        else
+          render json: @university.errors, status: :unprocessable_entity
+         end
       end
 
       private

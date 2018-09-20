@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  has_user_project: one
-  comentario: MyString
   calificacion: 1
-  idActivity: 1
+  comentario: MyString
+  idActividad: 1
+  has_user_project: one
 
 two:
-  has_user_project: two
-  comentario: MyString
   calificacion: 1
-  idActivity: 1
+  comentario: MyString
+  idActividad: 1
+  has_user_project: two

@@ -56,7 +56,8 @@ module Api
 
         # Never trust parameters from the scary internet, only allow the white list through.
         def activity_params
-          params.require(:activity).permit(:name_activity, :description_activity, :fecha_activity, :lugar_activity, :status_activity_id, :type_activity_id)
+          params.require(:activity).permit(:name_activity, :description_activity,
+             :fecha_activity, :lugar_activity, :status_activity_id, :type_activity_id,:project_id)
         end
     end
   end

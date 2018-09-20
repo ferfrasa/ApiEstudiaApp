@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180918213818) do
+ActiveRecord::Schema.define(version: 20180919222924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,16 @@ ActiveRecord::Schema.define(version: 20180918213818) do
     t.index ["type_activity_id"], name: "index_activities_on_type_activity_id"
   end
 
+  create_table "appreciations", force: :cascade do |t|
+    t.integer "calificacion"
+    t.string "comentario"
+    t.integer "idActividad"
+    t.bigint "has_user_project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["has_user_project_id"], name: "index_appreciations_on_has_user_project_id"
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "name_category"
     t.datetime "created_at", null: false
@@ -44,6 +54,16 @@ ActiveRecord::Schema.define(version: 20180918213818) do
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_has_project_tags_on_project_id"
     t.index ["tag_id"], name: "index_has_project_tags_on_tag_id"
+  end
+
+  create_table "has_user_projects", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "project_id"
+    t.boolean "rol"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_has_user_projects_on_project_id"
+    t.index ["user_id"], name: "index_has_user_projects_on_user_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -128,8 +148,11 @@ ActiveRecord::Schema.define(version: 20180918213818) do
   add_foreign_key "activities", "projects"
   add_foreign_key "activities", "status_activities"
   add_foreign_key "activities", "type_activities"
+  add_foreign_key "appreciations", "has_user_projects"
   add_foreign_key "has_project_tags", "projects"
   add_foreign_key "has_project_tags", "tags"
+  add_foreign_key "has_user_projects", "projects"
+  add_foreign_key "has_user_projects", "users"
   add_foreign_key "projects", "categories"
   add_foreign_key "projects", "spectators"
   add_foreign_key "users", "universities"

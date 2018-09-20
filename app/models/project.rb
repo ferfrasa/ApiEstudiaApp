@@ -4,7 +4,8 @@ class Project < ApplicationRecord
   has_many :activities
   has_many :has_project_tag, dependent: :destroy 
   has_many :tags, through: :has_project_tag
-  has_many :users, through: :has_user_project 
+  has_many :users, through: :has_user_project
+
   validates :name_project, presence: true
   validates :description_project, presence: true
   validates :status_project, presence: true

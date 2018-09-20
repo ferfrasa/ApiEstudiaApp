@@ -45,7 +45,7 @@ module Api
 
       
       def destroy
-        if @category.destroy
+      if @category.destroy
           render json: {category: "ELIMINADO"} ,status: :ok #, location: @category
         else
           render json: @category.errors, status: :unprocessable_entity

@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180919222924) do
+ActiveRecord::Schema.define(version: 20180921001645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
     t.string "name_activity"
-    t.string "description_activity"
+    t.text "description_activity"
     t.datetime "fecha_activity"
     t.string "lugar_activity"
     t.bigint "status_activity_id"
@@ -33,11 +33,12 @@ ActiveRecord::Schema.define(version: 20180919222924) do
   create_table "appreciations", force: :cascade do |t|
     t.integer "calificacion"
     t.string "comentario"
-    t.integer "idActividad"
-    t.bigint "has_user_project_id"
+    t.bigint "user_id"
+    t.bigint "activity_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["has_user_project_id"], name: "index_appreciations_on_has_user_project_id"
+    t.index ["activity_id"], name: "index_appreciations_on_activity_id"
+    t.index ["user_id"], name: "index_appreciations_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -68,7 +69,7 @@ ActiveRecord::Schema.define(version: 20180919222924) do
 
   create_table "projects", force: :cascade do |t|
     t.string "name_project"
-    t.string "description_project"
+    t.text "description_project"
     t.string "code_project"
     t.boolean "status_project", default: true
     t.float "prom_calif_project", default: 0.0
@@ -148,7 +149,8 @@ ActiveRecord::Schema.define(version: 20180919222924) do
   add_foreign_key "activities", "projects"
   add_foreign_key "activities", "status_activities"
   add_foreign_key "activities", "type_activities"
-  add_foreign_key "appreciations", "has_user_projects"
+  add_foreign_key "appreciations", "activities"
+  add_foreign_key "appreciations", "users"
   add_foreign_key "has_project_tags", "projects"
   add_foreign_key "has_project_tags", "tags"
   add_foreign_key "has_user_projects", "projects"

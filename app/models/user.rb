@@ -5,6 +5,8 @@ class User < ApplicationRecord
   belongs_to :university
   has_many :has_user_project, dependent: :destroy 
   has_many :projects, through: :has_user_project
+  has_many :appreciations
+
   
   validates :name, presence: true
   validates :doc, presence: true, uniqueness: true

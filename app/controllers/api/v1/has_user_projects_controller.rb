@@ -1,6 +1,7 @@
 module Api
   module V1    
     class HasUserProjectsController < ApplicationController
+      before_action :authenticate_user
       before_action :set_has_user_project, only: [:show, :update, :destroy]
 
       # GET /has_user_projects

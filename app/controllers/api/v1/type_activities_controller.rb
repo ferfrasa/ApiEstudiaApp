@@ -1,6 +1,7 @@
 module Api
   module V1
     class TypeActivitiesController < ApplicationController
+      before_action :authenticate_user
       before_action :set_type_activity, only: [:show, :update, :destroy]
 
       # GET /type_activities

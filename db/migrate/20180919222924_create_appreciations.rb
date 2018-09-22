@@ -3,8 +3,8 @@ class CreateAppreciations < ActiveRecord::Migration[5.1]
     create_table :appreciations do |t|
       t.integer :calificacion
       t.string :comentario
-      t.integer :idActividad
-      t.belongs_to :has_user_project, foreign_key: true
+      t.belongs_to :user, foreign_key: true
+      t.belongs_to :activity,foreign_key: true
 
       t.timestamps
     end

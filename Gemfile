@@ -23,6 +23,9 @@ gem 'oj', '~> 3.6', '>= 3.6.6'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+gem 'knock'
+gem 'rack-cors', require: 'rack/cors'
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

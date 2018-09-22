@@ -24,12 +24,12 @@ response = client.post do |req|
 response = client.post do |req|
     req.url '/api/v1/appreciations'#url para pasar el dato                   
     req.headers['Content-Type']='application/json' #json poraplicairon
-    req.body = '{"appreciation":{"calificacion":"1",
+    req.body = '{"appreciation":{"calificacion":"3",
                                  "comentario":"interesante conferenci",
-                                 "idActividad":"1",
-                              "has_user_project_id":"3"    
+                                 "activity_id":"2",
+                              "user_id":"13"    
                              }}'
-                    
+                             
 end
 
 

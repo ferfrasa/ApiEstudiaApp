@@ -1,6 +1,7 @@
 module Api
   module V1
     class StatusActivitiesController < ApplicationController
+      before_action :authenticate_user
       before_action :set_status_activity, only: [:show, :update, :destroy]
       # GET /status_activities
       # GET /status_activities.json

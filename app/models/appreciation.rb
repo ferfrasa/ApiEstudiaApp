@@ -1,5 +1,5 @@
 class Appreciation < ApplicationRecord
-  belongs_to :has_user_project
+  belongs_to :user
+  belongs_to :activity
   validates :calificacion, presence: true
-  validates :idActividad, presence: true
 end

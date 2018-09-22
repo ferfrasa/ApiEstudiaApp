@@ -1,6 +1,7 @@
 module Api
   module V1       
     class AppreciationsController < ApplicationController
+     # before_action :authenticate_user
       before_action :set_appreciation, only: [:show, :update, :destroy]
 
       # GET /appreciations
@@ -56,7 +57,7 @@ module Api
 
         # Never trust parameters from the scary internet, only allow the white list through.
         def appreciation_params
-          params.require(:appreciation).permit(:calificacion, :comentario, :idActividad, :has_user_project_id)
+          params.require(:appreciation).permit(:calificacion, :comentario, :activity_id, :user_id)
         end
     end
   end

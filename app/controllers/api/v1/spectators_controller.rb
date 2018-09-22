@@ -1,6 +1,7 @@
 module Api
   module V1
     class SpectatorsController < ApplicationController
+      before_action :authenticate_user
       before_action :set_spectator, only: [:show, :update, :destroy]
 
       # GET /spectators

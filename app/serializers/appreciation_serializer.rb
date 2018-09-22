@@ -1,4 +1,6 @@
 class AppreciationSerializer < ActiveModel::Serializer
-  attributes :id, :calificacion, :comentario, :idActividad
-  has_one :has_user_project
+  attributes :id, :calificacion, :comentario
+  has_one :activity
+  has_one :user
+  
 end

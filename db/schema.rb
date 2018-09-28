@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180921001645) do
+ActiveRecord::Schema.define(version: 20180926170713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20180921001645) do
     t.boolean "rol"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "status", default: true
     t.index ["project_id"], name: "index_has_user_projects_on_project_id"
     t.index ["user_id"], name: "index_has_user_projects_on_user_id"
   end
@@ -136,11 +137,12 @@ ActiveRecord::Schema.define(version: 20180921001645) do
     t.string "doc"
     t.string "password_digest"
     t.bigint "user_type_id"
-    t.bigint "university_id"
+    t.integer "university_id", default: 5
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "token"
     t.boolean "status_user", default: true
+    t.string "id_firebase"
     t.index ["token"], name: "index_users_on_token"
     t.index ["university_id"], name: "index_users_on_university_id"
     t.index ["user_type_id"], name: "index_users_on_user_type_id"

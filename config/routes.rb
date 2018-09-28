@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  post 'user_token' => 'user_token#create'
+ #post 'user_token' => 'user_token#create'
   namespace 'api', defaults: { format: "json" }  do
     namespace 'v1' do
+      post 'user_token' => 'user_token#create'
       resources :appreciations
       resources :has_user_projects
       resources :has_project_tags

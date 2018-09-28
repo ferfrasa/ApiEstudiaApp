@@ -1,7 +1,7 @@
 module Api
   module V1
     class UserTypesController < ApplicationController
-      before_action :authenticate_user
+     # before_action :authenticate_user , expect: [:show, :index]
       before_action :set_user_type, only: [:show, :update, :destroy]
 
       # GET /user_types

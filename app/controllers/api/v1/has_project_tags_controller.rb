@@ -1,7 +1,7 @@
 module Api
   module V1
     class HasProjectTagsController < ApplicationController
-      before_action :authenticate_user
+      #before_action :authenticate_user
       before_action :set_has_project_tag, only: [:show, :update, :destroy]
 
       # GET /has_project_tags

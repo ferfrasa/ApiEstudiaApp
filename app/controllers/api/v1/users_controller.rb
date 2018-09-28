@@ -58,11 +58,11 @@ module Api
 
         # Never trust parameters from the scary internet, only allow the white list through.
         def user_params
-          params.require(:user).permit(:name, :email, :doc, :password, :user_type_id, :university_id)
+          params.require(:user).permit(:id_firebase,:name, :email,  :password,:password_confirmation, :user_type_id)
         end
 
         def user_params_update
-          params.require(:user).permit(:name, :email, :doc, :password, :password, :password_confirmation,  :university_id)
+          params.require(:user).permit(:name, :email, :doc, :password,  :password_confirmation,  :university_id)
         end
     end
   end

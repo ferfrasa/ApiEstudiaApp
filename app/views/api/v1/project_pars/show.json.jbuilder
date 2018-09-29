@@ -1,0 +1,1 @@
+json.partial! "project_pars/project_par", project_par: @project_par

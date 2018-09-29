@@ -22,15 +22,10 @@ response = client.post do |req|
 =end
 #begin
 response = client.post do |req|
-    req.url '/api/v1/users'#url para pasar el dato                   
+    req.url '/api/v1/has_user_projects'#url para pasar el dato                   
     req.headers['Content-Type']='application/json' #json poraplicairon
-    req.body = '{"user":{"name":"Test Human",
-                                "email":"test@example.com",
-                                "doc":"123456789",
-                                "password":"test1234561111",
-                                "password_confirmation":"test1234561111",
-                                "user_type_id":2,
-                                "university_id":1}}' '
+    req.body='{"has_user_project":{"user_id":20, "project_id":21, "rol":false}}'
+  
                              
                             
 end

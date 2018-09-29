@@ -1,0 +1,1 @@
+json.array! @project_pars, partial: 'project_pars/project_pars', as: :project_pars

@@ -17,7 +17,9 @@ Rails.application.routes.draw do
       resources :universities
       resources :user_types
       resources :pruebas
-     end
-   end 
+      resources :user_firebases
+      resources :listps
+    end
+  end 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

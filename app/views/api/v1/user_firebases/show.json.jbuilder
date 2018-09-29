@@ -1,0 +1,1 @@
+json.partial! "user_firebases/user_firebase", user_firebase: @user_firebase

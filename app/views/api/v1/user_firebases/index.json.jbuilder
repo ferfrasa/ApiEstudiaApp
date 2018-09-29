@@ -1,0 +1,1 @@
+json.array! @user_firebases, partial: 'user_firebases/user_firebase', as: :user_firebase

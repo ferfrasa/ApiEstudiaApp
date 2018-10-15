@@ -1,7 +1,8 @@
 module Api
   module V1
     class ProjectsController < ApplicationController
-      #before_action :authenticate_user
+      before_action :authenticate_user
+      before_action :is_authorized, only:[:create,:update,:delete]
       before_action :set_project, only: [:show, :update, :destroy]
 
       # GET /projects
@@ -70,6 +71,16 @@ module Api
           params.require(:project).permit(:name_project, :description_project, 
              :status_project, :category_id, :spectator_id)
         end
+
+        def is_authorized
+             
+          if current_user.user_type_id ==1 || current_user.user_type_id ==38 || current_user.user_type_id ==39
+            return true
+          else
+            render json:  @project, status: :unauthorized
+          end  
+            
+        end 
     end
   end
 end  

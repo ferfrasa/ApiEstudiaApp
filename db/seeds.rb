@@ -9,7 +9,10 @@
 
         #UserType.create(user_type: 'administrador')
         #UserType.create(user_type: 'user')
-        UserType.create(name: 'comerciante')
-        UserType.create(name: 'profesor_u')
-        UserType.create(name: 'estudiante')
-        UserType.create(name: 'lider_colegio')
+        
+        Category.create(name_category: 'DEPORTIVO')
+        Category.create(name_category: 'MUSICAL')
+        Category.create(name_category: 'ENTRETENIMIENTO')
+        Category.create(name_category: 'PRIVADO')
+        Category.create(name_category: 'OTRO')
+       # UserType.create(name: 'lider_colegio')

@@ -1,7 +1,9 @@
 module Api
   module V1
     class CategoriesController < ApplicationController
-      #before_action :authenticate_user
+    #  
+      before_action :authenticate_user
+      before_action :is_admin, only:[:create,:update,:delete]
       before_action :set_category, only: [:show, :update, :destroy]
 
       # GET /categories
@@ -9,6 +11,7 @@ module Api
       def index
         @categories = Category.all
         render json: @categories
+  
       end
 
       # GET /categories/1
@@ -63,6 +66,16 @@ module Api
         def category_params
           params.require(:category).permit(:name_category)
         end
+
+        def is_admin
+             
+          if current_user.user_type_id ==37
+            return true
+          else
+            render json: @category, status: :unauthorized
+          end  
+            
+        end  
     end
   end
 end    

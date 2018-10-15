@@ -1,8 +1,9 @@
 module Api
   module V1
     class HasProjectTagsController < ApplicationController
-      #before_action :authenticate_user
-      before_action :set_has_project_tag, only: [:show, :update, :destroy]
+      before_action :authenticate_user
+      before_action :is_authorized, only:[:create,:update,:delete]
+      before_action :set_has_project_tags, only: [:show, :update, :destroy]
 
       # GET /has_project_tags
       # GET /has_project_tags.json
@@ -55,10 +56,23 @@ module Api
           @has_project_tag = HasProjectTag.find(params[:id])
         end
 
+        def set_has_project_tags
+          @has_project_tag =  HasProjectTag.where(:project_id => params[:id])# ProjectUser.find(params[:id])
+        end
+
         # Never trust parameters from the scary internet, only allow the white list through.
         def has_project_tag_params
           params.require(:has_project_tag).permit(:project_id, :tag_id)
         end
+        def is_authorized
+             
+          if current_user.user_type_id ==1 || current_user.user_type_id ==38 || current_user.user_type_id ==39
+            return true
+          else
+            render json:  @has_project_tag, status: :unauthorized
+          end  
+            
+        end 
     end
   end
 end    

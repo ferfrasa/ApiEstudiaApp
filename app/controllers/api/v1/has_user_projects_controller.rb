@@ -1,8 +1,9 @@
 module Api
   module V1    
     class HasUserProjectsController < ApplicationController
-      #before_action :authenticate_user
-      before_action :set_has_user_project, only: [:show, :update, :destroy]
+      before_action :authenticate_user
+      #before_action :is_authorized, only:[:create,:update,:delete]
+      before_action :set_has_user_projectc, only: [:show, :update, :destroy]
 
       # GET /has_user_projects
       # GET /has_user_projects.json
@@ -55,11 +56,24 @@ module Api
         def set_has_user_project
           @has_user_project = HasUserProject.find(params[:id])
         end
+        def set_has_user_projectc
+          @has_user_project = HasUserProject.where(:user_id => params[:id])# ProjectUser.find(params[:id])
+        end
 
         # Never trust parameters from the scary internet, only allow the white list through.
         def has_user_project_params
           params.require(:has_user_project).permit(:user_id, :project_id, :rol)
         end
+
+        def is_authorized
+             
+          if current_user.user_type_id ==1 || current_user.user_type_id ==38 || current_user.user_type_id ==39
+            return true
+          else
+            render json: @has_user_project, status: :unauthorized
+          end  
+            
+        end 
     end
   end
 end    

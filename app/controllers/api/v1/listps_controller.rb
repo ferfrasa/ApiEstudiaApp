@@ -1,7 +1,8 @@
 module Api
    module V1
      class ListpsController < ApplicationController
-        before_action :set_listp, only: [:show]
+      before_action :authenticate_user
+      before_action :set_listp, only: [:show]
         
         def index
           @listps = Listp.all

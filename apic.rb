@@ -12,19 +12,18 @@ end
 #end
 =begin
 response = client.post do |req|
-    req.url '/api/v1/appreciations'#url para pasar el dato                   
+    req.url '/api/v1/categories'#url para pasar el dato                   
     req.headers['Content-Type']='application/json' #json poraplicairon
-    req.body = '{"appreciations":{"user_id":"9",
-                         "project_id":"3",
-                         "rol":"false"
+    req.body = '{"category":{"name_category":"10"
                         }}'
                     
 =end
 #begin
-response = client.post do |req|
-    req.url '/api/v1/has_user_projects'#url para pasar el dato                   
+response = client.get do |req|
+    req.url '/api/v1/categories'#url para pasar el dato                   
     req.headers['Content-Type']='application/json' #json poraplicairon
-    req.body='{"has_user_project":{"user_id":20, "project_id":21, "rol":false}}'
+    req.headers['authorization']='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1Mzg4ODcwOTQsInN1YiI6MTV9.cpNYnXS4QbMNhPmqWk6a4JvGpKRnpvUL74J2RXkt4_g'
+    #req.body='{"category":{"name_cate":20, "project_id":21, "rol":false}}'
   
                              
                             

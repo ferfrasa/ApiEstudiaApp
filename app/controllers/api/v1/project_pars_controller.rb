@@ -1,6 +1,7 @@
 module Api
     module V1
         class ProjectParsController < ApplicationController
+        before_action :authenticate_user
          before_action :set_pro_par, only: [:show]
             
           def index

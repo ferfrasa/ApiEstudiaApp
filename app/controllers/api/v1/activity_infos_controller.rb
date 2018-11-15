@@ -1,13 +1,15 @@
 module Api
     module V1
         class ActivityInfosController < ApplicationController
-          
+          before_action :authenticate_user
             before_action :set_has_activity_info, only: [:show]
+            before_action :update_status_activity, only: [:index]
 
           def index
-            @activity_infos = ActivityInfo.all
-            render json: @activity_infos
-          end
+              @activity_infos = ActivityInfo.all
+              render json: @activity_infos
+            end 
+          
 
           def show
             render json: @activity_info 

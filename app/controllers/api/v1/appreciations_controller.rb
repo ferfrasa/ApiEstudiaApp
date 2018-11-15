@@ -1,7 +1,7 @@
 module Api
   module V1       
     class AppreciationsController < ApplicationController
-     # before_action :authenticate_user
+      before_action :authenticate_user
       before_action :set_appreciation, only: [:show, :update, :destroy]
 
       # GET /appreciations

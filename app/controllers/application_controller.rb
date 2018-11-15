@@ -25,6 +25,12 @@ class ApplicationController < ActionController::API
         def authenticate_liderC!
             current_user.is_jefe_col?
         end
+
+        def update_status_activity
+            
+            Activity.where("fecha_activity < ? AND  status_activity_id != ? AND status_activity_id != ? ", DateTime.now ,5,34).update_all(status_activity_id: 7)
+
+        end     
    
 end
 
